@@ -3,33 +3,33 @@ import useHttp from "../hooks/http.hook";
 const QuizService = () => {
     const { request } = useHttp();
     const getCategories = async () => {
-        const result = await request('http://localhost:3001/categories');
+        const result = await request('https://my-json-server.typicode.com/Nurbolat02/json/categories');
         return result
     }
 
     const getAllQuizzes = async () => {
-        const result = await request('http://localhost:3001/quizzes');
+        const result = await request('https://my-json-server.typicode.com/Nurbolat02/json/quizzes');
         return result.map(element => renderSingleQuizInfo(element))
 
     }
     const getQuizzeById = async (id) => {
-        const result = await request(`http://localhost:3001/quizzes/${id}`);
+        const result = await request(`https://my-json-server.typicode.com/Nurbolat02/json/quizzes/${id}`);
         return renderSingleQuizInfo(result)
 
     }
     const getImages = async (id) => {
-        const result = await request(`http://localhost:3001/images`);
+        const result = await request(`https://my-json-server.typicode.com/Nurbolat02/json/images`);
         return result
 
     }
 
     const addNewQuizze = async (data) => {
-        const result = await request(`http://localhost:3001/quizzes`, 'POST', JSON.stringify(data));
+        const result = await request(`https://my-json-server.typicode.com/Nurbolat02/json/quizzes`, 'POST', JSON.stringify(data));
         return result
     }
 
     const updateQuizze = async (id, data) => {
-        const result = await request(`http://localhost:3001/quizzes/${id}`, 'PUT', JSON.stringify(data));
+        const result = await request(`https://my-json-server.typicode.com/Nurbolat02/json/quizzes/${id}`, 'PUT', JSON.stringify(data));
         return result;
     };
 
