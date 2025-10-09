@@ -5,19 +5,20 @@ const EditingPage = () => {
     const { id } = useParams()
     return (
         <div className="editing-page">
-            <h2>Выберите действие</h2>
+            <h2>Select Action</h2>
             <div className="editing-buttons">
                 <Link to={`/newQuiz/${id}`} className="slider-arrow">
-                    ✏️ Изменить тест
+                    ✏️ Edit Test
                 </Link>
                 <Link to={`/editQuestions/${id}`} className="slider-arrow">
-                    ❓ Изменить вопросы
+                    ❓ Edit Questions
                 </Link>
                 <a href="/" className="slider-arrow delete-btn">
-                    🗑️ Удалить тест
+                    🗑️ Delete Test
                 </a>
             </div>
         </div>
+
     );
 };
 

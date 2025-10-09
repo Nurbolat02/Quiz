@@ -5,7 +5,7 @@ const Footer = () => {
             <div className="container">
                 <div className="footer__madeBy">
                     <p>
-                        © 2025 MyQuiz. Все права защищены. Разработано в феврале 2025 года.
+                        © 2025 MyQuiz. All rights reserved. Developed February 2025.
                     </p>
                 </div>
             </div>

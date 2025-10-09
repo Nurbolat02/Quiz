@@ -75,7 +75,7 @@ const CreatePizda = () => {
 
     return (
         <div className="create-questions">
-            <h2>Добавление вопросов для теста {id}</h2>
+            <h2>Adding test questions {id}</h2>
 
             <Formik
                 initialValues={{ questions }}
@@ -85,7 +85,7 @@ const CreatePizda = () => {
                 {() => (
                     <Form>
                         <button type="button" onClick={addQuestion} className="btn btn-add">
-                            ➕ Добавить вопрос
+                            ➕ Add a question
                         </button>
 
                         {questions.map((q, qIndex) => (
@@ -93,7 +93,7 @@ const CreatePizda = () => {
                                 <div className="question-header">
                                     <input
                                         type="text"
-                                        placeholder={`Вопрос ${qIndex + 1}`}
+                                        placeholder={`Question ${qIndex + 1}`}
                                         value={q.question}
                                         onChange={(e) => handleQuestionChange(qIndex, e.target.value)}
                                     />
@@ -117,7 +117,7 @@ const CreatePizda = () => {
                                             />
                                             <input
                                                 type="text"
-                                                placeholder={`Вариант ${aIndex + 1}`}
+                                                placeholder={`Option ${aIndex + 1}`}
                                                 value={ans}
                                                 onChange={(e) =>
                                                     handleAnswerChange(qIndex, aIndex, e.target.value)
@@ -130,7 +130,7 @@ const CreatePizda = () => {
                         ))}
 
                         {questions.length > 0 && (
-                            <Link to="/" onClick={saveQuestions} className="btn btn-save"> 💾 Сохранить все вопросы </Link>
+                            <Link to="/" onClick={saveQuestions} className="btn btn-save"> 💾 Save all questions</Link>
                         )}
                     </Form>
                 )}

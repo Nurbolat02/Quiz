@@ -14,19 +14,19 @@ const ResultModal = ({ result, question, time }) => {
     return (
         <div className="result-modal" id="quizResultModal">
             <div className="result-modal__overlay">
-                <h2 className="result-modal__title">Результаты теста</h2>
+                <h2 className="result-modal__title">Test results</h2>
 
                 <div className="result-modal__content">
-                    <span>Ваш результат:</span>
+                    <span>Your result:</span>
                     <strong>{result} / {question}</strong>
                 </div>
 
                 <div className="result-modal__time">
-                    ⏱ Время прохождения: {formatTime(time)}
+                    ⏱ Test time: {formatTime(time)}
                 </div>
 
                 <div className="result-modal__buttons">
-                    <a href="/" className="result-btn result-btn--home">На главную</a>
+                    <a href="/" className="result-btn result-btn--home">Home</a>
                 </div>
             </div>
         </div>

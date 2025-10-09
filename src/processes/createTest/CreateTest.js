@@ -52,18 +52,19 @@ const CreateTest = () => {
 
     // Валидация Yup
     const validationSchema = Yup.object({
-        name: Yup.string().required("Введите название"),
-        category: Yup.string().required("Выберите категорию"),
+        name: Yup.string().required("Enter a name"),
+        category: Yup.string().required("Select a category"),
         time: Yup.number()
-            .required("Введите время")
-            .min(1, "Минимум 1 минута"),
-        description: Yup.string().required("Введите описание"),
+            .required("Enter the time")
+            .min(1, "Minimum 1 minute"),
+        description: Yup.string().required("Enter a description"),
         rating: Yup.number()
-            .required("Введите рейтинг")
+            .required("Enter a rating")
             .min(1)
             .max(5),
-        image: Yup.string().required("Выберите изображение"),
+        image: Yup.string().required("Select an image"),
     });
+
 
     const handleSubmit = async (values) => {
         const quizData = { ...values, id };
@@ -78,7 +79,8 @@ const CreateTest = () => {
     return (
         <div className="edit-test">
             <h2 className="edit-test__title">
-                {routeId ? "Редактировать тест" : "Создать новый тест"}
+                {routeId ? "Edit Test" : "Create New Test"}
+
             </h2>
 
             <Formik
@@ -90,13 +92,13 @@ const CreateTest = () => {
                 {({ isSubmitting }) => (
                     <Form className="edit-test__form">
                         <label>
-                            Название:
+                            Name:
                             <Field type="text" name="name" />
                             <ErrorMessage name="name" component="div" className="error" />
                         </label>
 
                         <label>
-                            Категория:
+                            Category:
                             <Field as="select" name="category">
                                 {categories.map((cat) => (
                                     <option key={cat.id} value={cat.name}>
@@ -108,25 +110,25 @@ const CreateTest = () => {
                         </label>
 
                         <label>
-                            Время (мин):
+                            Time (min):
                             <Field type="number" name="time" min="1" />
                             <ErrorMessage name="time" component="div" className="error" />
                         </label>
 
                         <label>
-                            Рейтинг (1–5):
+                            Rating (1–5):
                             <Field type="number" name="rating" min="1" max="5" />
                             <ErrorMessage name="rating" component="div" className="error" />
                         </label>
 
                         <label>
-                            Описание:
+                            Description:
                             <Field as="textarea" name="description" />
                             <ErrorMessage name="description" component="div" className="error" />
                         </label>
 
                         <label>
-                            Изображение:
+                            Image:
                             <Field as="select" name="image">
                                 {images.map((img, idx) => (
                                     <option key={idx} value={img.path}>
@@ -142,7 +144,7 @@ const CreateTest = () => {
                             className="btn btn-save"
                             disabled={isSubmitting}
                         >
-                            {routeId ? "💾 Сохранить изменения" : "➡️ Далее к вопросам"}
+                            💾 Save changes
                         </button>
                     </Form>
                 )}

@@ -56,7 +56,7 @@ const Header = () => {
                 className={`side-menu ${modalOpen ? '' : burgerOpen ? 'open' : ''}`}>
                 <button onClick={() => { setBurgerOpen(false) }} className="side-menu__close">×</button>
                 <ul>
-                    <Link to={`/newQuiz`} >➕ Добавить тест</Link>
+                    <Link to={`/newQuiz`} >➕ Add a test</Link>
                 </ul>
             </nav>
         </header>
