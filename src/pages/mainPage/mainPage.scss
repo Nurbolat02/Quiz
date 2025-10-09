@@ -1,0 +1,46 @@
+
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.main {
+  flex: 1;
+
+  &__head {
+    margin: 20px auto;
+    width: 80px;
+    height: 4px;
+    border-radius: 20%;
+    background-color: white;
+  }
+}
+
+.fa-star {
+  color: yellow;
+  margin-right: 5px;
+  font-size: 1rem;
+}
+.gray {
+  color: #C4C4C4;
+}
+.show {
+  display: flex;
+}
+
+/* Прячем модалку */
+.hide {
+  display: none;
+}
+
+/* Анимация появления */
+.fade {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+

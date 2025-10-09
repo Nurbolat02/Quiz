@@ -1,0 +1,69 @@
+🔥 Держи, повторю то же самое, чтобы можно было скопировать 👇
+
+---
+
+### 📌 Сценарий работы `useQuizSlider`
+
+#### 🟢 1-й рендер
+
+* `loading = true` → `enabled = false`
+* В `useEffect`:
+
+  ```js
+  if (!enabled || initialized.current) return;
+  ```
+
+  → `!enabled === true`, значит **возврат**, слайдер не запускается.
+
+---
+
+#### 🟢 Когда данные загрузились
+
+* `loading = false`, `error = false`, `hasQuestions = true`
+* Теперь `enabled = true`
+* `initialized.current = false` (ещё не запускали)
+* Условие:
+
+  ```js
+  if (!enabled || initialized.current) return;
+  ```
+
+  → оба условия ложь, значит идём дальше → **инициализация слайдера запускается**.
+* Внутри кода хука ставим:
+
+  ```js
+  initialized.current = true;
+  ```
+
+---
+
+#### 🟢 Следующий рендер
+
+* `enabled = true` (данные загружены, вопросы есть)
+* `initialized.current = true` (мы уже инициализировали)
+* Условие:
+
+  ```js
+  if (!enabled || initialized.current) return;
+  ```
+
+  → `initialized.current === true`, значит **выход**, повторно не запускаем.
+
+---
+
+#### 🔴 Если тест окажется пустым (нет вопросов)
+
+* `hasQuestions = false` → `enabled = false`
+* Проверка `if (!enabled || initialized.current) return;`
+  → `!enabled === true`, значит **слайдер вообще не трогаем**.
+
+---
+
+### 📊 Итого
+
+* **`enabled`** отвечает: *вообще нужно ли запускать?*
+* **`initialized`** отвечает: *мы уже запускали? если да — не дёргай повторно*.
+
+---
+
+Хочешь, я ещё сделаю табличку «состояние → что произойдёт», чтобы вообще в 2 строки было видно?

@@ -1,0 +1,36 @@
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+ul, li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+a {
+  text-decoration: none;   
+  color: inherit;          
+}
+
+body {
+  background-color: #1E90FF;
+  color: white;
+  font-size: 1.5rem;
+}
+
+.padding {
+  padding: 25px 10px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+@media (max-width: 600px) {
+  body {
+    font-size: 1rem;
+  }
+}

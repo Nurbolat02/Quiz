@@ -1,0 +1,63 @@
+.result-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.result-modal__overlay {
+  background: linear-gradient(135deg, #1e90ff, #00bfff); // нежно-синий фон
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+
+.result-modal__title {
+  margin-bottom: 1rem;
+}
+
+.result-modal__content {
+  margin: 1rem 0;
+  font-size: 1.2rem;
+}
+
+.result-modal__buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.result-btn {
+  text-decoration: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 500;
+  color: #fff;
+  cursor: pointer;
+}
+
+.result-btn--retry {
+  background: #28a745;
+}
+
+.result-btn--retry:hover {
+  background: #1e7e34;
+}
+
+.result-btn--home {
+  background: #6c757d;
+}
+
+.result-btn--home:hover {
+  background: #565e64;
+}

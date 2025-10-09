@@ -1,0 +1,185 @@
+/* Общий контейнер слайдера */
+.slider {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  font-family: sans-serif;
+  background: #00BFFF; /* ярко-голубой фон, как у карточек */
+  border-radius: 12px;
+  padding: 20px;
+  color: white;
+}
+
+/* Внутренний контейнер */
+.slider-wrapper {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.slider-inner {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+/* Отдельный слайд */
+.slide {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+  width: 100%;
+}
+
+/* Карточка */
+.slide-card {
+  background: transparent; /* прозрачный, чтобы фон был голубой */
+  border-radius: 12px;
+  padding: 20px;
+  width: 100%;
+  max-width: 800px;
+}
+
+/* Заголовок вопроса */
+.question__title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 16px;
+  color: white;
+}
+
+/* Варианты ответа */
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.quiz-option {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.quiz-option:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Радиокнопки скрываем */
+.quiz-option input[type="radio"] {
+  display: none;
+}
+
+/* Буква */
+.quiz-option__letter {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: white;
+  color: #004aad;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  transition: background 0.2s, color 0.2s;
+}
+
+/* При выборе */
+.quiz-option input[type="radio"]:checked + .quiz-option__letter {
+  background: #004aad;
+  color: white;
+}
+
+/* Текст */
+.quiz-option__text {
+  flex: 1;
+  text-align: left;
+  color: white;
+}
+
+/* Панель навигации */
+.slider-counter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: white;
+}
+
+/* Кнопки "вперёд/назад" */
+.slider-prev,
+.slider-next {
+  cursor: pointer;
+  user-select: none;
+  font-size: 24px;
+  padding: 6px 12px;
+  background: white;
+  color: #004aad;
+  border-radius: 6px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.slider-prev:hover,
+.slider-next:hover {
+  background: #004aad;
+  color: white;
+}
+
+/* Индикаторы (кружки) */
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+  gap: 8px;
+}
+
+.carousel-indicators li {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: white;
+  border: 2px solid #004aad;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: opacity 0.3s, transform 0.2s, background 0.3s;
+}
+
+.carousel-indicators li.active {
+  opacity: 1;
+  background: #004aad;
+  transform: scale(1.2);
+}
+
+/* Кнопка завершения */
+.finish-test-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: white;
+  color: #004aad;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.finish-test-btn:hover {
+  background-color: #004aad;
+  color: white;
+}
+
+/* Результат теста */
+.test-result {
+  margin-top: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+}

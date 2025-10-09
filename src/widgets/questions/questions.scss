@@ -1,0 +1,191 @@
+.main {
+  &__quizes {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  &__quiz {
+    display: flex;
+    align-items: center;
+    margin: 20px auto;
+    width: 80%;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #00BFFF;
+    cursor: pointer;
+
+    .quiz__img {
+      width: 72px;
+      height: 72px;
+      border-radius: 20%;
+    }
+
+    .quiz__info {
+      flex: 1 1 20%;
+      padding-left: 20px;
+    }
+
+    .quiz__rating {
+      flex: 1 1 5%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
+.fa-star {
+  color: yellow;
+  margin-right: 10px;
+  font-size: 1.5rem;
+}
+
+.yellow {
+  color: yellow;
+}
+.slider-controls {
+    margin-top: 50px;
+    display: flex;
+    gap: 10px;
+}
+.slider-arrow,
+.slider-submit {
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.slider-arrow:hover {
+    background-color: #555;
+}
+
+.slider-submit {
+    background-color: #0066ff;
+}
+
+.slider-submit:hover {
+    background-color: #0052cc;
+}
+
+.test__content{
+  width: 100%;
+}
+.carousel-indicators{
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+.carousel-indicator {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 52px;
+    height: 52px;
+    margin: 0 5px;
+    border-radius: 50%;
+    background-color: white; /* белый фон */
+    border: 2px solid #004aad; /* тёмно-синяя обводка */
+    color: #004aad; /* тёмно-синий текст */
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.carousel-indicator:hover {
+    background-color: #2980b9; /* темнее при наведении */
+    transform: scale(1.3);
+    cursor: pointer;
+}
+
+.carousel-indicator.active {
+    background-color: #1f5f8b; /* ещё темнее для активного */
+}
+.carousel-indicator.answered {
+    background-color: green;
+    color: white;
+}
+/* Заголовок вопроса */
+.quiz-question__title {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.quiz__name,.quiz__time{
+  font-size: 1.5rem;
+}
+/* Стили вариантов ответа */
+.quiz-option {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.8rem 1rem;
+  margin-bottom: 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  input {
+    display: none;
+  }
+/* Верхняя панель с названием и временем */
+.test__info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Основная часть теста */
+.test {
+  flex: 1; /* растягивается между шапкой и подвалом */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* центрируем контент по вертикали */
+  align-items: center;     /* центрируем по горизонтали */
+  padding: 2rem;
+  text-align: center;
+}
+  /* Кружок с буквой */
+  .quiz-option__letter {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #ccc;
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+ 
+  }
+
+  /* Текст ответа */
+  .quiz-option__text {
+    flex: 1;
+    text-align: left;
+  }
+
+  /* Когда выбран вариант */
+  input:checked + .quiz-option__letter {
+    background: linear-gradient(135deg, #1e90ff, #00bfff);
+    color: #fff;
+  }
+}
+
+.no-questions div{
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
