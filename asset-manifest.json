@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/zalupa/static/css/main.acb88129.css",
+    "main.js": "/zalupa/static/js/main.05f14a2b.js",
+    "static/media/error.gif": "/zalupa/static/media/error.42292aa12b6bc303ce99.gif",
+    "index.html": "/zalupa/index.html",
+    "main.acb88129.css.map": "/zalupa/static/css/main.acb88129.css.map",
+    "main.05f14a2b.js.map": "/zalupa/static/js/main.05f14a2b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.acb88129.css",
+    "static/js/main.05f14a2b.js"
+  ]
+}
