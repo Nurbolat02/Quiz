@@ -1,11 +1,12 @@
 require("dotenv").config();
-const { Pool } = require("pg");
+const { drizzle } = require("drizzle-orm/postgres-js");
+const postgres = require("postgres");
+const schema = require("./schema");
 
-const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: process.env.DATABASE_URL && process.env.DATABASE_URL.includes("sslmode=require")
-        ? { rejectUnauthorized: false }
-        : false,
+const client = postgres(process.env.DATABASE_URL, {
+    ssl: process.env.DATABASE_URL && process.env.DATABASE_URL.includes("sslmode=require") ? "require" : false,
 });
 
-module.exports = pool;
+const db = drizzle(client, { schema });
+
+module.exports = db;

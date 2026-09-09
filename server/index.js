@@ -1,23 +1,34 @@
 const express = require("express");
 const cors = require("cors");
-const pool = require("./db");
+const { eq, asc } = require("drizzle-orm");
+const db = require("./db");
+const { categories, images, quizzes, questions } = require("./schema");
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-const QUIZ_SELECT = `
-    SELECT
-        q.id, q.category, q.name, q.time, q.rating, q.image, q.description,
-        COALESCE(
-            (SELECT json_agg(
-                json_build_object('id', qs.id, 'question', qs.question, 'options', qs.options, 'correct', qs.correct)
-                ORDER BY qs.position
-            ) FROM questions qs WHERE qs.quiz_id = q.id),
-            '[]'
-        ) AS questions
-    FROM quizzes q
-`;
+const serializeQuiz = (quiz) => ({
+    id: quiz.id,
+    category: quiz.category,
+    name: quiz.name,
+    time: quiz.time,
+    rating: quiz.rating,
+    image: quiz.image,
+    description: quiz.description,
+    questions: quiz.questions.map((q) => ({
+        id: q.id,
+        question: q.question,
+        options: q.options,
+        correct: q.correct,
+    })),
+});
+
+const findQuiz = (id) =>
+    db.query.quizzes.findFirst({
+        where: eq(quizzes.id, id),
+        with: { questions: { orderBy: asc(questions.position) } },
+    });
 
 app.get("/", (req, res) => {
     res.json({ status: "ok" });
@@ -25,8 +36,7 @@ app.get("/", (req, res) => {
 
 app.get("/categories", async (req, res, next) => {
     try {
-        const { rows } = await pool.query("SELECT id, name FROM categories ORDER BY id");
-        res.json(rows);
+        res.json(await db.select().from(categories));
     } catch (error) {
         next(error);
     }
@@ -34,8 +44,7 @@ app.get("/categories", async (req, res, next) => {
 
 app.get("/images", async (req, res, next) => {
     try {
-        const { rows } = await pool.query("SELECT id, label, path FROM images ORDER BY id");
-        res.json(rows);
+        res.json(await db.select().from(images));
     } catch (error) {
         next(error);
     }
@@ -43,8 +52,10 @@ app.get("/images", async (req, res, next) => {
 
 app.get("/quizzes", async (req, res, next) => {
     try {
-        const { rows } = await pool.query(`${QUIZ_SELECT} ORDER BY q.id`);
-        res.json(rows);
+        const rows = await db.query.quizzes.findMany({
+            with: { questions: { orderBy: asc(questions.position) } },
+        });
+        res.json(rows.map(serializeQuiz));
     } catch (error) {
         next(error);
     }
@@ -52,9 +63,9 @@ app.get("/quizzes", async (req, res, next) => {
 
 app.get("/quizzes/:id", async (req, res, next) => {
     try {
-        const { rows } = await pool.query(`${QUIZ_SELECT} WHERE q.id = $1`, [req.params.id]);
-        if (rows.length === 0) return res.status(404).json({ error: "Quiz not found" });
-        res.json(rows[0]);
+        const quiz = await findQuiz(req.params.id);
+        if (!quiz) return res.status(404).json({ error: "Quiz not found" });
+        res.json(serializeQuiz(quiz));
     } catch (error) {
         next(error);
     }
@@ -63,60 +74,53 @@ app.get("/quizzes/:id", async (req, res, next) => {
 app.post("/quizzes", async (req, res, next) => {
     try {
         const { id, category, name, time, rating, image, description } = req.body;
-        await pool.query(
-            `INSERT INTO quizzes (id, category, name, time, rating, image, description)
-             VALUES ($1, $2, $3, $4, $5, $6, $7)`,
-            [id, category, name, time, rating, image, description]
-        );
-        const { rows } = await pool.query(`${QUIZ_SELECT} WHERE q.id = $1`, [id]);
-        res.status(201).json(rows[0]);
+        await db.insert(quizzes).values({ id, category, name, time, rating, image, description });
+        res.status(201).json(serializeQuiz(await findQuiz(id)));
     } catch (error) {
         next(error);
     }
 });
 
 app.put("/quizzes/:id", async (req, res, next) => {
-    const client = await pool.connect();
     try {
         const { id } = req.params;
-        const { category, name, time, rating, image, description, questions } = req.body;
+        const { category, name, time, rating, image, description, questions: newQuestions } = req.body;
 
-        await client.query("BEGIN");
+        await db.transaction(async (tx) => {
+            const [existing] = await tx.select().from(quizzes).where(eq(quizzes.id, id));
+            if (!existing) return;
 
-        await client.query(
-            `UPDATE quizzes
-             SET category = COALESCE($1, category),
-                 name = COALESCE($2, name),
-                 time = COALESCE($3, time),
-                 rating = COALESCE($4, rating),
-                 image = COALESCE($5, image),
-                 description = COALESCE($6, description)
-             WHERE id = $7`,
-            [category, name, time, rating, image, description, id]
-        );
+            await tx.update(quizzes).set({
+                category: category ?? existing.category,
+                name: name ?? existing.name,
+                time: time ?? existing.time,
+                rating: rating ?? existing.rating,
+                image: image ?? existing.image,
+                description: description ?? existing.description,
+            }).where(eq(quizzes.id, id));
 
-        if (Array.isArray(questions)) {
-            await client.query("DELETE FROM questions WHERE quiz_id = $1", [id]);
-            for (let i = 0; i < questions.length; i++) {
-                const q = questions[i];
-                await client.query(
-                    `INSERT INTO questions (id, quiz_id, position, question, options, correct)
-                     VALUES ($1, $2, $3, $4, $5, $6)`,
-                    [q.id, id, i, q.question, JSON.stringify(q.options), q.correct]
-                );
+            if (Array.isArray(newQuestions)) {
+                await tx.delete(questions).where(eq(questions.quizId, id));
+                if (newQuestions.length > 0) {
+                    await tx.insert(questions).values(
+                        newQuestions.map((q, index) => ({
+                            id: q.id,
+                            quizId: id,
+                            position: index,
+                            question: q.question,
+                            options: q.options,
+                            correct: q.correct,
+                        }))
+                    );
+                }
             }
-        }
+        });
 
-        await client.query("COMMIT");
-
-        const { rows } = await pool.query(`${QUIZ_SELECT} WHERE q.id = $1`, [id]);
-        if (rows.length === 0) return res.status(404).json({ error: "Quiz not found" });
-        res.json(rows[0]);
+        const quiz = await findQuiz(id);
+        if (!quiz) return res.status(404).json({ error: "Quiz not found" });
+        res.json(serializeQuiz(quiz));
     } catch (error) {
-        await client.query("ROLLBACK");
         next(error);
-    } finally {
-        client.release();
     }
 });
 
