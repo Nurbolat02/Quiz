@@ -2,7 +2,7 @@ import QuizService from '../../shared/services/QuizService';
 import Spinner from '../../widgets/spinner/Spinner';
 import { QuizContext } from '../../shared/quiz/QuizContext';
 import { useContext } from 'react';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import './filter.scss';
 
 const Filter = () => {
@@ -11,16 +11,16 @@ const Filter = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false)
     const { activeCategory, setActiveCategory } = useContext(QuizContext)
-    useEffect(() => {
-        getData()
-    }, [])
-    const getData = () => {
+    const getData = useCallback(() => {
         setLoading(true);
         getCategories()
             .then(setData)
             .catch(() => setError(true))
             .finally(() => setLoading(false));
-    }
+    }, [getCategories]);
+    useEffect(() => {
+        getData()
+    }, [getData])
 
     const rendeData = () => {
         return data.map(({ id, name }) => {

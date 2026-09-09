@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { QuizContext } from "../../shared/quiz/QuizContext"
 import { useContext } from "react"
 const Search = () => {

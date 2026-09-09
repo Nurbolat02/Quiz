@@ -2,7 +2,7 @@ import './modal.scss';
 import { QuizContext } from '../../shared/quiz/QuizContext';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect, useCallback } from 'react';
 import QuizService from '../../shared/services/QuizService';
 import { Link } from 'react-router-dom';
 
@@ -11,16 +11,16 @@ const Modal = () => {
     const { modalOpen, setModalOpen, currentQuiz, currentData, setCurrentData, update } = useContext(QuizContext)
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
-    useEffect(() => {
-        if (!currentQuiz) return;
-        getData()
-    }, [currentQuiz, update])
-    const getData = () => {
+    const getData = useCallback(() => {
         getQuizzeById(currentQuiz)
             .then(setCurrentData)
             .catch(() => setError(true))
             .finally(() => setLoading(false));
-    }
+    }, [currentQuiz, getQuizzeById, setCurrentData]);
+    useEffect(() => {
+        if (!currentQuiz) return;
+        getData()
+    }, [currentQuiz, update, getData])
     const rendeData = ({ id, name, questionsCount, time, rating, description }) => {
         return (
             <div className="modal" id="quizModal">

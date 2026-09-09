@@ -1,5 +1,5 @@
 import './quizItem.scss';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import QuizService from '../../shared/services/QuizService';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
@@ -13,20 +13,20 @@ const QuizItem = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
     const { setModalOpen, setCurrentQuiz, activeCategory, value } = useContext(QuizContext)
+    const getData = useCallback(() => {
+        setLoading(true);
+        getAllQuizzes()
+            .then(setData)
+            .catch(() => setError(true))
+            .finally(() => setLoading(false));
+    }, [getAllQuizzes]);
     useEffect(() => {
         const timer = setTimeout(() => {
             getData()
         }, 1000)
 
         return () => clearTimeout(timer);
-    }, [])
-    const getData = () => {
-        setLoading(true);
-        getAllQuizzes()
-            .then(setData)
-            .catch(() => setError(true))
-            .finally(() => setLoading(false));
-    }
+    }, [getData])
 
     const rendeData = (data) => {
         return data

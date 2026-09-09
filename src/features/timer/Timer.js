@@ -22,7 +22,7 @@ const Timer = ({ flag, getTime }) => {
             clearInterval(interval)
         }
 
-    }, [flag])
+    }, [flag, getTime])
 
     return <div className="timer">{formatTime(timeDisplay)}</div>;
 };

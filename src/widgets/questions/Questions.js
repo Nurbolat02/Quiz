@@ -5,7 +5,7 @@ import Footer from '../footer/Footer';
 import Timer from '../../features/timer/Timer';
 import { useParams } from "react-router-dom";
 import QuizService from '../../shared/services/QuizService';
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 
 const Questions = () => {
     const { id } = useParams();

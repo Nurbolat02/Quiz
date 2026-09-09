@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import ResultModal from "../../widgets/resultModal/ResultModal";
 import QuizService from '../../shared/services/QuizService';
 import "./styles.scss";
@@ -18,7 +18,7 @@ const QuizSlider = ({ id, stopTime, finalTime }) => {
 
     useEffect(() => {
         getData();
-    }, []);
+    }, [getData]);
 
     const nextSlide = () => setSlideIndex(prev => prev >= data.questions.length - 1 ? 0 : prev + 1);
     const prevSlide = () => setSlideIndex(prev => prev <= 0 ? data.questions.length - 1 : prev - 1);

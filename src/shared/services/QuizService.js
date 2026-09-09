@@ -1,52 +1,51 @@
+import { useCallback } from "react";
 import useHttp from "../hooks/http.hook";
+
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:4000";
+
+const renderSingleQuizInfo = (data) => {
+    return {
+        id: data.id,
+        category: data.category,
+        name: data.name,
+        questionsCount: data.questions ? data.questions.length : 0,
+        time: data.time,
+        rating: data.rating,
+        image: data.image,
+        description: data.description,
+        questions: data.questions,
+    }
+}
 
 const QuizService = () => {
     const { request } = useHttp();
-    const getCategories = async () => {
-        const result = await request('https://my-json-server.typicode.com/Nurbolat02/json/categories');
-        return result
-    }
 
-    const getAllQuizzes = async () => {
-        const result = await request('https://my-json-server.typicode.com/Nurbolat02/json/quizzes');
-        return result.map(element => renderSingleQuizInfo(element))
+    const getCategories = useCallback(async () => {
+        return await request(`${API_URL}/categories`);
+    }, [request]);
 
-    }
-    const getQuizzeById = async (id) => {
-        const result = await request(`https://my-json-server.typicode.com/Nurbolat02/json/quizzes/${id}`);
-        return renderSingleQuizInfo(result)
+    const getAllQuizzes = useCallback(async () => {
+        const result = await request(`${API_URL}/quizzes`);
+        return result.map(renderSingleQuizInfo);
+    }, [request]);
 
-    }
-    const getImages = async (id) => {
-        const result = await request(`https://my-json-server.typicode.com/Nurbolat02/json/images`);
-        return result
+    const getQuizzeById = useCallback(async (id) => {
+        const result = await request(`${API_URL}/quizzes/${id}`);
+        return renderSingleQuizInfo(result);
+    }, [request]);
 
-    }
+    const getImages = useCallback(async () => {
+        return await request(`${API_URL}/images`);
+    }, [request]);
 
-    const addNewQuizze = async (data) => {
-        const result = await request(`https://my-json-server.typicode.com/Nurbolat02/json/quizzes`, 'POST', JSON.stringify(data));
-        return result
-    }
+    const addNewQuizze = useCallback(async (data) => {
+        return await request(`${API_URL}/quizzes`, 'POST', JSON.stringify(data));
+    }, [request]);
 
-    const updateQuizze = async (id, data) => {
-        const result = await request(`https://my-json-server.typicode.com/Nurbolat02/json/quizzes/${id}`, 'PUT', JSON.stringify(data));
-        return result;
-    };
+    const updateQuizze = useCallback(async (id, data) => {
+        return await request(`${API_URL}/quizzes/${id}`, 'PUT', JSON.stringify(data));
+    }, [request]);
 
-    const renderSingleQuizInfo = (data) => {
-        return {
-            id: data.id,
-            category: data.category,
-            name: data.name,
-            questionsCount: data.questions ? data.questions.length : 0,
-            time: data.time,
-            rating: data.rating,
-            image: data.image,
-            description: data.description,
-            questions: data.questions,
-
-        }
-    }
     return {
         getCategories,
         getAllQuizzes,
