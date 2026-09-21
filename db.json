@@ -12,34 +12,34 @@
       "questions": [
         {
           "id": 4,
-          "question": "Что чаще всего является признаком влюбленности?",
+          "question": "What is most often a sign of being in love?",
           "options": [
-            "Желание проводить время вместе",
-            "Желание спорить о политике",
-            "Нежелание общаться",
-            "Забывание имени партнёра"
+            "Wanting to spend time together",
+            "Wanting to argue about politics",
+            "Not wanting to communicate",
+            "Forgetting your partner's name"
           ],
           "correct": 0
         },
         {
           "id": 5,
-          "question": "Как можно улучшить отношения?",
+          "question": "How can you improve a relationship?",
           "options": [
-            "Честное общение",
-            "Игнорирование проблем",
-            "Обвинение партнёра",
-            "Ни в коем случае не извиняться"
+            "Honest communication",
+            "Ignoring problems",
+            "Blaming your partner",
+            "Never apologizing under any circumstances"
           ],
           "correct": 0
         },
         {
           "id": 6,
-          "question": "Что лучше всего помогает при ссорах?",
+          "question": "What helps the most during arguments?",
           "options": [
-            "Взять паузу и успокоиться",
-            "Повышать голос",
-            "Уходить на неделю без объяснений",
-            "Забыть о проблеме"
+            "Taking a pause and calming down",
+            "Raising your voice",
+            "Leaving for a week without explanation",
+            "Forgetting about the problem"
           ],
           "correct": 0
         }
@@ -57,34 +57,34 @@
       "questions": [
         {
           "id": 7,
-          "question": "Что может улучшить качество жизни?",
+          "question": "What can improve your quality of life?",
           "options": [
-            "Регулярный сон и спорт",
-            "Постоянный стресс",
-            "Работа без выходных",
-            "Отсутствие общения"
+            "Regular sleep and exercise",
+            "Constant stress",
+            "Working without days off",
+            "Lack of social contact"
           ],
           "correct": 0
         },
         {
           "id": 8,
-          "question": "Какое хобби помогает развивать мозг?",
+          "question": "Which hobby helps develop the brain?",
           "options": [
-            "Чтение книг",
-            "Скроллинг соцсетей",
-            "Лёжа на диване целый день",
-            "Игнорирование новых знаний"
+            "Reading books",
+            "Scrolling social media",
+            "Lying on the couch all day",
+            "Ignoring new knowledge"
           ],
           "correct": 0
         },
         {
           "id": 9,
-          "question": "Что помогает быть счастливее?",
+          "question": "What helps you be happier?",
           "options": [
-            "Благодарность и позитивное мышление",
-            "Сравнение себя с другими",
-            "Жалобы каждый день",
-            "Игнорирование успехов"
+            "Gratitude and positive thinking",
+            "Comparing yourself to others",
+            "Complaining every day",
+            "Ignoring your achievements"
           ],
           "correct": 0
         }
@@ -102,81 +102,36 @@
       "questions": [
         {
           "id": 10,
-          "question": "Что помогает работать продуктивнее?",
+          "question": "What helps you work more productively?",
           "options": [
-            "Чёткое планирование задач",
-            "Постоянные отвлечения",
-            "Работа без перерывов",
-            "Хаотичное выполнение дел"
+            "Clear task planning",
+            "Constant distractions",
+            "Working without breaks",
+            "Doing tasks chaotically"
           ],
           "correct": 0
         },
         {
           "id": 11,
-          "question": "Какой навык важен для командной работы?",
+          "question": "Which skill is important for teamwork?",
           "options": [
-            "Умение слушать и сотрудничать",
-            "Всегда спорить",
-            "Игнорировать чужие идеи",
-            "Работать только в одиночку"
+            "Being able to listen and collaborate",
+            "Always arguing",
+            "Ignoring other people's ideas",
+            "Working only alone"
           ],
           "correct": 0
         },
         {
           "id": 12,
-          "question": "Что помогает избежать выгорания на работе?",
+          "question": "What helps you avoid burnout at work?",
           "options": [
-            "Регулярный отдых и баланс",
-            "Переработки каждый день",
-            "Полное отсутствие сна",
-            "Игнорирование своих потребностей"
+            "Regular rest and balance",
+            "Overtime every day",
+            "Complete lack of sleep",
+            "Ignoring your own needs"
           ],
           "correct": 0
-        }
-      ]
-    },
-    {
-      "id": "2914",
-      "category": "work",
-      "name": "пизда",
-      "questionsCount": 2,
-      "time": 2222222222,
-      "rating": 3,
-      "image": "/img/book_1.png",
-      "description": "ччч",
-      "questions": [
-        {
-          "question": "2",
-          "options": [
-            "2",
-            "2",
-            "2",
-            "2"
-          ],
-          "correct": 0,
-          "id": 1759740329840
-        },
-        {
-          "question": "1",
-          "options": [
-            "2",
-            "3",
-            "4",
-            "5"
-          ],
-          "correct": 0,
-          "id": 1759740550846
-        },
-        {
-          "question": "33",
-          "options": [
-            "33",
-            "33",
-            "33",
-            "33"
-          ],
-          "correct": 3,
-          "id": 1759740682961
         }
       ]
     }
@@ -202,17 +157,17 @@
   "images": [
     {
       "id": "1",
-      "label": "Книга 1",
+      "label": "Book 1",
       "path": "/img/book_1.png"
     },
     {
       "id": "2",
-      "label": "Книга 2",
+      "label": "Book 2",
       "path": "/img/book_2.png"
     },
     {
       "id": "3",
-      "label": "Книга 3",
+      "label": "Book 3",
       "path": "/img/book_3.png"
     }
   ]
